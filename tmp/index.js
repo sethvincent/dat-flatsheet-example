@@ -1,3 +1,9 @@
+/**
+* issue request from the browser
+* run with
+* $ browserify index.js | tape-run
+**/
+
 var request = require('xhr');
 var btoa = require('btoa')
 var test = require('tape');

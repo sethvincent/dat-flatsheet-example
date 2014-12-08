@@ -1,0 +1,40 @@
+{
+  "name": "tmp",
+  "description": "",
+  "version": "0.0.0",
+  "repository": {
+    "url": "git://github.com/sethvincent/tmp.git"
+  },
+  "main": "index.js",
+  "browser": {
+    "request": "xhr"
+  },
+  "browserify": {
+    "transform": [
+      "brfs"
+    ]
+  },
+  "scripts": {
+    "test": "node test-dat-api.js",
+    "bundle-js": "browserify index.js -o bundle.js",
+    "bundle-css": "rework-npm style.css | myth | cleancss -o bundle.css",
+    "watch-css": "gazer -p 'style.css' 'rework-npm style.css | myth > bundle.css'",
+    "bundle": "npm run bundle-js && npm run bundle-css",
+    "start": "beefy index.js:bundle.js --live && npm run watch-css"
+  },
+  "dependencies": {
+    "JSONStream": "^0.10.0",
+    "btoa": "^1.1.2",
+    "dat": "^6.9.3",
+    "request": "^2.49.0",
+    "xhr": "^1.17.0"
+  },
+  "devDependencies": {
+    "brfs": "^1.2.0",
+    "clean-css": "^2.2.20",
+    "myth": "^1.2.1",
+    "rework-npm": "^1.0.0",
+    "rework-npm-cli": "^0.1.1",
+    "tape": "^3.0.3"
+  }
+}

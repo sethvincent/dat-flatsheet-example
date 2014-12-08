@@ -1,3 +1,4 @@
+/*
 var request = require('xhr');
 
 var opts = { 
@@ -12,3 +13,7 @@ var opts = {
 request(opts, function(err, resp, body) {
   console.log(body)
 })
+*/
+
+var DatAPI = require('../dat-api')
+

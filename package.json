@@ -1,9 +1,9 @@
 {
-  "name": "tmp",
+  "name": "dat-flatsheet-example",
   "description": "",
   "version": "0.0.0",
   "repository": {
-    "url": "git://github.com/sethvincent/tmp.git"
+    "url": "git://github.com/sethvincent/dat-flatsheet-example.git"
   },
   "main": "index.js",
   "browser": {
@@ -26,6 +26,7 @@
     "JSONStream": "^0.10.0",
     "btoa": "^1.1.2",
     "dat": "^6.9.3",
+    "flatsheet-editor": "0.0.0",
     "request": "^2.49.0",
     "xhr": "^1.17.0"
   },

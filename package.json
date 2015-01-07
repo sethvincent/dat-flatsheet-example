@@ -6,9 +6,6 @@
     "url": "git://github.com/sethvincent/dat-flatsheet-example.git"
   },
   "main": "index.js",
-  "browser": {
-    "request": "xhr"
-  },
   "browserify": {
     "transform": [
       "brfs"
@@ -26,9 +23,8 @@
     "JSONStream": "^0.10.0",
     "btoa": "^1.1.2",
     "dat": "^6.9.3",
-    "flatsheet-editor": "0.0.0",
-    "request": "^2.49.0",
-    "xhr": "^1.17.0"
+    "dat-api-client": "^1.2.0",
+    "flatsheet-editor": "0.0.0"
   },
   "devDependencies": {
     "brfs": "^1.2.0",

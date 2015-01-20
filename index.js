@@ -19,8 +19,6 @@ dat.info(init)
 function init (err, res, info) {
   dat.get(function (err, res, body) {
     editor.set({
-    table = new Editor(body.rows, {
-      el: 'main-content',
       name: info.name,
       description: info.description,
       publisher: info.publisher

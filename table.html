@@ -16,7 +16,7 @@
           <tr>
             <span class="spacer"></span>
             {{#columns:key}}
-            <th decorator="sortable" id={{id}}>
+            <th id={{id}}>
               <span class="column-name"><input value="{{name}}"></span>
               <button id="{{id}}" class="destroy-column">x</button>
             </th>
@@ -25,7 +25,7 @@
         </thead>
         <tbody id="table-body">
           {{#rows:i}}
-          <tr decorator="sortable" class="rows.{{ i }}">
+          <tr class="rows.{{ i }}">
             <button class="destroy-row" id={{i}}>x</button>
             {{#this:value}}
             <td class="column{{value}}" id="rows.{{ i }}.{{value}}">

@@ -1,20 +1,20 @@
-var fs = require('fs')
-var DatAPI = require('dat-api-client')
-var Editor = require('table-editor')
+var fs = require('fs');
+var DatAPI = require('dat-api-client');
+var Editor = require('table-editor');
 var activeChange = false;
 
 var dat = DatAPI({ 
   url: 'http://127.0.0.1:6461',
   user: 'foo',
   pass: 'bar'
-})
+});
 
 var editor = new Editor({
   el: 'main-content',
   template: fs.readFileSync('./table.html', 'utf8')
-})
+});
 
-dat.info(init)
+dat.info(init);
 
 function init (err, res, info) {
   dat.get(function (err, res, body) {
@@ -22,11 +22,11 @@ function init (err, res, info) {
       name: info.name,
       description: info.description,
       publisher: info.publisher
-    })
+    });
 
-    editor.import(body.rows)
-    editor.on('change', changes)
-  })
+    editor.import(body.rows);
+    editor.on('change', changes);
+  });
 }
 
 function changes (change) {

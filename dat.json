@@ -1,5 +1,7 @@
 {
   "name": "dat-flatsheet-example",
   "description": "example usage of dat + flatsheet",
-  "publisher": "seth vincent"
+  "publisher": "seth vincent",
+  "adminUser": "foo",
+  "adminPass": "bar"
 }

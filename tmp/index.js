@@ -1,19 +1,59 @@
-/*
-var request = require('xhr');
 
-var opts = { 
-  uri: 'http://127.0.0.1:6461/api/rows', 
-  method: "POST", 
-  timeout: 0, 
-  body: { wat: 'cool' }, 
-  cors: true, 
-  json: true
+/**
+* issue request from the browser
+* run with
+* $ browserify index.js | tape-run
+**/
+
+var request = require('xhr');
+var btoa = require('btoa')
+var test = require('tape');
+var api = {}
+
+api.postRows = function (url, data, user, pass, cb) {
+  var opts = {
+    uri: url + '/api/rows',
+    method: "POST",
+    timeout: 0,
+    cors: true,
+    json: data,
+    headers: {'authorization': 'Basic ' + btoa(user + ':' + pass)}
+  }
+  request(opts, cb)
 }
 
-request(opts, function(err, resp, body) {
-  console.log(body)
-})
-*/
+api.session = function (url, user, pass, cb) {
+  var self = this
+  var apiUrl = url + '/api/session'
+  var options = {
+    uri: apiUrl,
+    method: 'GET',
+    json: true,
+    headers: {'authorization': 'Basic ' + btoa(user + ':' + pass)}
+  }
+  request(options,
+    function (err, resp, json) {
+      if (err) return cb(err)
+      if (json.loggedOut) {
+        return cb(new Error('Bad username or password.'))
+      }
+      return cb(null, resp, json)
+    }
+  )
+}
 
-var DatAPI = require('../dat-api')
+
+// SET THESE
+var url = 'http://127.0.0.1:6461';
+var user = 'foo';
+var pass = 'bar';
+
+
+test('a test', function (t) {
+  var data = {cool: 'test'}
+  api.postRows(url, data, user, pass, function (err, resp, json) {
+    console.log(JSON.stringify(json))
+    t.end()
+  });
+});
 

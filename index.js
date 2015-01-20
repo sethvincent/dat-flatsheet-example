@@ -1,30 +1,56 @@
-var DatAPI = require('./dat-api')
-var Editor = require('flatsheet-editor')
+var fs = require('fs')
+var DatAPI = require('dat-api-client')
+var Editor = require('table-editor')
+var activeChange = false;
 
-var dat = DatAPI({ remote: 'http://127.0.0.1:6461' })
+var dat = DatAPI({ 
+  url: 'http://127.0.0.1:6461',
+  user: 'foo',
+  pass: 'bar'
+})
 
-var table
+var editor = new Editor({
+  el: 'main-content',
+  template: fs.readFileSync('./table.html', 'utf8')
+})
+
 dat.info(init)
 
 function init (err, res, info) {
-  dat.rows(function (err, res, body) {
-    table = new Editor(body.rows, {
-      el: 'main-content',
+  dat.get(function (err, res, body) {
+
+    editor.set({
       name: info.name,
       description: info.description,
       publisher: info.publisher
     })
 
-    table.editor.on('change', changes)
+    editor.import(body.rows)
+    editor.on('change', changes)
   })
 }
 
 function changes (change) {
+  if (activeChange) return;
+  
   Object.keys(change).forEach(function (key) {
-    var row = table.getRow(key.split('.')[1])
-    row.version++
-    dat.postRows(row, function (err, res, body) {
-      console.log(err, body)
-    })
-  })
+    var rowID = key.split('.')[1];
+    var row = editor.getRow(rowID);
+
+    dat.put(row, { force:true }, function (err, res, body) {
+      activeChange = true;
+      editor.setCell(rowID, 'version', body.version);
+      activeChange = false;
+    });
+  });
+}
+
+function setVersion (id) {
+  
+  var row = id.split('.')[1];
+  var column = editor.getColumnID('version');
+  console.log('rows.' + row + '._' + column)
+  var i = editor.get('rows.' + row + '._' + column);
+  editor.set('rows.' + row + '._' + column, ++i);
+  
 }

@@ -17,25 +17,31 @@
   "scripts": {
     "test": "node test-dat-api.js",
     "bundle-js": "browserify index.js -o bundle.js",
+    "watch-js": "watchify index.js -o bundle.js",
     "bundle-css": "rework-npm style.css | myth | cleancss -o bundle.css",
     "watch-css": "gazer -p 'style.css' 'rework-npm style.css | myth > bundle.css'",
+    "watch": "npm run watch-js && npm run watch-css",
     "bundle": "npm run bundle-js && npm run bundle-css",
-    "start": "beefy index.js:bundle.js --live && npm run watch-css"
+    "start": "serve && npm run watch"
   },
   "dependencies": {
     "JSONStream": "^0.10.0",
     "btoa": "^1.1.2",
-    "dat": "^6.9.3",
+    "dat-api-client": "^1.2.0",
     "flatsheet-editor": "0.0.0",
     "request": "^2.49.0",
+    "table-editor": "^2.0.0",
     "xhr": "^1.17.0"
   },
   "devDependencies": {
     "brfs": "^1.2.0",
     "clean-css": "^2.2.20",
+    "dat": "^6.9.4",
+    "debug": "^2.1.1",
     "myth": "^1.2.1",
     "rework-npm": "^1.0.0",
     "rework-npm-cli": "^0.1.1",
-    "tape": "^3.0.3"
+    "tape": "^3.0.3",
+    "watchify": "^2.1.1"
   }
 }

@@ -6,16 +6,12 @@
     "url": "git://github.com/sethvincent/dat-flatsheet-example.git"
   },
   "main": "index.js",
-  "browser": {
-    "request": "xhr"
-  },
   "browserify": {
     "transform": [
       "brfs"
     ]
   },
   "scripts": {
-    "test": "node test-dat-api.js",
     "bundle-js": "browserify index.js -o bundle.js",
     "watch-js": "watchify index.js -o bundle.js",
     "bundle-css": "rework-npm style.css | myth | cleancss -o bundle.css",
@@ -25,18 +21,13 @@
     "start": "serve && npm run watch"
   },
   "dependencies": {
-    "JSONStream": "^0.10.0",
-    "btoa": "^1.1.2",
-    "dat-api-client": "^1.2.0",
-    "flatsheet-editor": "0.0.0",
-    "request": "^2.49.0",
     "table-editor": "^2.0.0",
-    "xhr": "^1.17.0"
+    "dat-api-client": "^1.2.0"
   },
   "devDependencies": {
     "brfs": "^1.2.0",
     "clean-css": "^2.2.20",
-    "dat": "^6.9.4",
+    "dat": "git://github.com/maxogden/dat",
     "debug": "^2.1.1",
     "myth": "^1.2.1",
     "rework-npm": "^1.0.0",

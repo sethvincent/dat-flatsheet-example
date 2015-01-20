@@ -18,8 +18,9 @@ dat.info(init)
 
 function init (err, res, info) {
   dat.get(function (err, res, body) {
-
     editor.set({
+    table = new Editor(body.rows, {
+      el: 'main-content',
       name: info.name,
       description: info.description,
       publisher: info.publisher
@@ -43,14 +44,4 @@ function changes (change) {
       activeChange = false;
     });
   });
-}
-
-function setVersion (id) {
-  
-  var row = id.split('.')[1];
-  var column = editor.getColumnID('version');
-  console.log('rows.' + row + '._' + column)
-  var i = editor.get('rows.' + row + '._' + column);
-  editor.set('rows.' + row + '._' + column, ++i);
-  
 }
